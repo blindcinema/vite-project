@@ -42,7 +42,7 @@ function submitForm(e) {
 }
 
  useEffect( ()=> {
-  if (context.token != null) {
+  if (context.token !== null) {
     let token = localStorage.getItem("token"); 
     context.setSignedIn(true);
     //console.log(token);

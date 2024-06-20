@@ -35,13 +35,13 @@ function Register() {
     });
   };
 
-function submitForm(e) {
+function submitForm(e: any) {
   e.preventDefault();
   fetchRegister(register.userName,register.password,register.name,register.email);
 }
 
  useEffect( ()=> {
-  if (context.token != null) {
+  if (context.token !== null) {
     let token = localStorage.getItem("token"); 
     context.setSignedIn(true);
     //console.log(token);
