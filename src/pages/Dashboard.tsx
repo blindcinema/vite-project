@@ -21,30 +21,32 @@ function Dashboard(props: any) {
 
         {context.role !== "Admin" ? ` YOU are a ${context.role} todo add client methods ` : <div>
             
-
+        <table>
         <thead>
-          <th>
-          Name 
-          </th>
-          <th>
-          Id
-          </th>
+          <tr>
+            <th>
+            Name 
+            </th>
+            <th>
+            Id
+            </th>
+          </tr>
           </thead>
           <tbody style={{}}>
           {users.map((user) => {
-                return <>
-                
-                <tr key={user.id + user.name}>{user.name}  
+                return (
+                <tr key={user.id + user.name}> {user.name}  
                   <td key={user.id} style={{paddingLeft:"2rem"}}> {user.id} </td>
-                  <td><input type="checkbox" id={user.id + "checkbox"}/></td>
-                  </tr> 
-                </>;
+                  <td><input type="checkbox" id={user.id + "checkbox"}/> </td>
+                  </tr>
+                  );
             })}
 
         </tbody>
+        </table>
              <GetAllUsers sendDataToParent={getChildUsers}/>
              <GetUnapprovedUsers sendDataToParent={getChildUsers}/>
-             <ApproveUser/>
+             <ApproveUser sendDataToParent={getChildUsers}/>
               </div>}
         
 
