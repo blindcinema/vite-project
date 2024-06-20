@@ -41,9 +41,9 @@ export default function GetUnapprovedUsers({sendDataToParent}) {
         <>
         <form onSubmit={getUnapprovedUsers}>
             <label htmlFor="pageSize">Page Size </label>
-            <input type="number" name="pageSize" id="pageSize"></input>
+            <input type="number" name="pageSize" id="pageSize" value={10}></input>
             <label htmlFor="pageNumber">Page Number </label>
-            <input type="number" name="pageNumber" id="pageNumber"></input>
+            <input type="number" name="pageNumber" id="pageNumber" value={1}></input>
         <button type="submit">Get Unapproved Users!</button>
         </form>
         </>

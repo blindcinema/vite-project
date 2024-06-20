@@ -17,6 +17,11 @@ function Dashboard(props: any) {
     <main>
         DASHBOARD 
         <div>{context.role}</div>
+        
+
+        {context.role !== "Admin" ? ` YOU are a ${context.role} todo add client methods ` : <div>
+            
+
         <thead>
           <th>
           Name 
@@ -37,13 +42,6 @@ function Dashboard(props: any) {
             })}
 
         </tbody>
-        {/* <ol id="userList">
-        {users.map((user) => {
-                return <li key={user.id}>{user.name}, {user.id}</li>;
-            })}
-        </ol> */}
-        {context.role !== "Admin" ? " YOU'RE NOT ADMIN!!! todo add client methods " : <div>
-            
              <GetAllUsers sendDataToParent={getChildUsers}/>
              <GetUnapprovedUsers sendDataToParent={getChildUsers}/>
              <ApproveUser/>

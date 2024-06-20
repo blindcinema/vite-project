@@ -28,10 +28,18 @@ export default function ApproveUser({sendDataToParent}) {
 
     async function approveUser (e: any,id: string, isApproved: Boolean) {
         e.preventDefault();
-        id = e.target.elements.idString.value;
-        isApproved = e.target.elements.isApproved.value;
         let token = localStorage.getItem("token");
-        await fetchApproveUser(token!,id, isApproved);   
+        id = e.target.elements.idString.value;
+        isApproved = e.target.elements.isApproved.checked;
+        console.log(isApproved)
+        if (isApproved) {
+            await fetchApproveUser(token!,id, isApproved);
+        }
+        else {
+            return;
+        }
+        
+   
         //console.log(response.users);  
         //sendDataToParent(response.users);  
         
