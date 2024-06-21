@@ -41,8 +41,61 @@ export const fetchUnapprovedUsers = async (token: string,pageSize: number, pageN
 
      
 }
-function login() {}
-function register() {}
+export const fetchLogin = async (username: string, password: string) => {
+  const response = await fetch('https://localhost:7274/api/User/login', {
+    method: 'POST',
+    mode: 'cors',
+    headers : { 'Content-type' : 'application/json', 'Accept' : 'text/json'},
+    body: JSON.stringify({username,password}),
+  }).then(response => {
+    if (!response.ok) {
+      alert("Bad username or password")
+      throw new Error(`HTTP error, status: = ${response.status}`);
+    }
+    else { 
+      return response.json();
+    }
+  }
+  ).then(res => {
+    
+    const json = res;
+    context.setRole(json.role);
+    context.setToken(json.token);
+    context.setUsername(json.userName);
+    context.setSignedIn(true);
+    localStorage.setItem("token",json.token);
+    localStorage.setItem("role",json.role);
+  }).catch(response => {
+    console.log(response);
+  });
+};
+export const fetchRegister = async (username: string, password: string,name: string,email: string) => {
+  const response = await fetch('https://localhost:7274/api/User/register', {
+    method: 'POST',
+    mode: 'cors',
+    headers : { 'Content-type' : 'application/json', 'Accept' : 'text/json'},
+    body: JSON.stringify({username,password,name,email}),
+  }).then(response => {
+    if (!response.ok) {
+      alert("Bad username or password")
+      throw new Error(`HTTP error, status: = ${response.status}`);
+    }
+    else { 
+      return response.json();
+    }
+  }
+  ).then(res => {
+    
+    const json = res;
+    context.setRole("Client");
+    context.setToken(json.token);
+    context.setUsername(json.userName);
+    context.setSignedIn(true);
+    localStorage.setItem("token",json.token);
+  }).catch(response => {
+    console.log(response);
+  });
+};
 
 export const fetchApproveUser = async (token: string,id: string) => {
     return await fetch(`https://localhost:7274/api/User/approve-user/${id}`, {
