@@ -5,6 +5,8 @@ import Logout from "../component/Logout";
 import { LoginContext } from "../context/LoginContext";
 import GetUnapprovedUsers from "../component/GetUnapprovedUsers";
 import ApproveUser from "../component/ApproveUser";
+import SoftDeleteUser from "../component/SoftDeleteUser";
+import HardDeleteUser from "../component/HardDeleteUser";
 
 function Dashboard(props: any) {
     const context = useContext(LoginContext);
@@ -47,6 +49,8 @@ function Dashboard(props: any) {
              <GetAllUsers sendDataToParent={getChildUsers}/>
              <GetUnapprovedUsers sendDataToParent={getChildUsers}/>
              <ApproveUser sendDataToParent={getChildUsers}/>
+             <SoftDeleteUser sendDataToParent={getChildUsers}/>
+             <HardDeleteUser sendDataToParent={getChildUsers}/>
               </div>}
         
 

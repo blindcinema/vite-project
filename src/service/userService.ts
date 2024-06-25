@@ -1,5 +1,7 @@
 //TODO make methods here
 
+import axios from "axios";
+
 
  export const fetchAllUsers = async (token: string) => {
     return await fetch('https://localhost:7274/api/User/get-all-users', {
@@ -113,7 +115,39 @@ export const fetchApproveUser = async (token: string,id: string) => {
        console.log(response);
      })     
 } 
-function softDeleteUser() {}
-function hardDeleteUser() {}
+
+// do axios
+export const softDeleteUser = async (token:string, id: string) => {
+try
+{  return await axios.post(`https://localhost:7274/api/User/soft-delete-user?id=${id}`, {
+    id: id,
+
+  }, {headers: { 'Content-type' : 'application/json', 'Accept' : 'text/json', 'Authorization': `bearer ${token}`} }
+).then(response => {return response}
+
+)}
+  catch (error) {
+    console.log(error);
+  }
+
+}
+
+
+
+export const hardDeleteUser = async (token:string, id: string) => {
+  try
+  {  return await axios.post(`https://localhost:7274/api/User/hard-delete-user?id=${id}`, {
+      id: id,
+  
+    }, {headers: { 'Content-type' : 'application/json', 'Accept' : 'text/json', 'Authorization': `bearer ${token}`} }
+  ).then(response => {return response}
+  
+  )}
+    catch (error) {
+      console.log(error);
+    }
+  
+  }
+
 function editUser() {}
 function changeClientRole() {}
