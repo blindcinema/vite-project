@@ -7,6 +7,7 @@ import GetUnapprovedUsers from "../component/GetUnapprovedUsers";
 import ApproveUser from "../component/ApproveUser";
 import SoftDeleteUser from "../component/SoftDeleteUser";
 import HardDeleteUser from "../component/HardDeleteUser";
+import HomeButton from "../component/HomeButton";
 
 function Dashboard(props: any) {
     const context = useContext(LoginContext);
@@ -17,6 +18,7 @@ function Dashboard(props: any) {
     }
   return (
     <main>
+      <HomeButton/>
         DASHBOARD 
         <div>{context.role}</div>
         

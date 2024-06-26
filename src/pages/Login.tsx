@@ -1,11 +1,13 @@
 
 import { useContext, useEffect, useState } from 'react';
 import {LoginContext} from '../context/LoginContext';
+import { redirect, useNavigate } from 'react-router-dom';
+import HomeButton from '../component/HomeButton';
 
 function Login() {
   let context = useContext(LoginContext);
+  const navigate = useNavigate();
   const [login,setLogin] = useState({userName:"",password:""});
-  const [loginToken,setLoginToken] = useState("");
 
   const fetchLogin = async (username: string, password: string) => {
     const response = await fetch('https://localhost:7274/api/User/login', {
@@ -36,9 +38,17 @@ function Login() {
     });
   };
 
-function submitForm(e) {
+async function submitForm(e) {
+
   e.preventDefault();
-  fetchLogin(login.userName,login.password);
+  await fetchLogin(login.userName,login.password);
+  if (context.signedIn) {
+    console.log(context)
+    navigate("/dashboard");
+  } 
+  else {
+    return null;
+  }
 }
 
  useEffect( ()=> {
@@ -54,6 +64,9 @@ function submitForm(e) {
 
   return (
     <main>
+      <div>
+        <HomeButton/>
+      </div>
       <form onSubmit={submitForm} method='POST' id='login-form'>
         <label htmlFor="username">User Name </label>
         <input type='text' onChange={ e => setLogin({...login, userName: e.target.value})}
@@ -63,7 +76,7 @@ function submitForm(e) {
         <input type='password'onChange={ e => setLogin({...login, password: e.target.value})}
          name='password' id='password'>
         </input>
-        <button>Submit</button>
+        <button type='submit'>Submit</button>
       </form>
       <div>
         {/*loginToken ? "Your token: "  +  loginToken : <></>

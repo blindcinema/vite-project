@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
+    const navigate = useNavigate();
     const context = useContext(LoginContext);
     function logout (e) {
         e.preventDefault();
@@ -9,7 +11,7 @@ export default function Logout() {
         context.setUsername("");
         context.setSignedIn(false);
         localStorage.clear();
-        console.log(context)
+        navigate("/");
     }
 
     return (

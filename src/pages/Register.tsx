@@ -1,8 +1,11 @@
 
 import { useContext, useEffect, useState } from 'react';
 import {LoginContext} from '../context/LoginContext';
+import { useNavigate } from 'react-router-dom';
+import HomeButton from '../component/HomeButton';
 
 function Register() {
+  const navigate = useNavigate();
   let context = useContext(LoginContext);
   const [register,setRegister] = useState({userName:"",password:"", name:"", email:""});
   const [loginToken,setLoginToken] = useState("");
@@ -35,9 +38,12 @@ function Register() {
     });
   };
 
-function submitForm(e: any) {
+async function submitForm(e: any) {
   e.preventDefault();
-  fetchRegister(register.userName,register.password,register.name,register.email);
+  await fetchRegister(register.userName,register.password,register.name,register.email);
+  if (context.signedIn) {
+    navigate("/dashboard");
+  }
 }
 
  useEffect( ()=> {
@@ -53,6 +59,9 @@ function submitForm(e: any) {
 
   return (
     <main>
+      <div>
+        <HomeButton/>
+      </div>
       <form onSubmit={submitForm} method='POST' id='login-form'>
         <label htmlFor="username">User Name </label>
         <input type='text' onChange={ e => setRegister({...register, userName: e.target.value})}
